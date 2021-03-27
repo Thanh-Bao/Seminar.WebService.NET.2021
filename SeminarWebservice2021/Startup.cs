@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
 
 namespace SeminarWebservice2021
 {
@@ -21,11 +22,15 @@ namespace SeminarWebservice2021
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // CROS
-            services.AddCors(options => {
-                options.AddPolicy("CrosPolicy", builder => builder.AllowAnyOrigin()
-                 .AllowAnyMethod().AllowAnyHeader().AllowCredentials().Build());
+            services.AddHttpClient("GiaoHangNhanhProduction", config =>
+            {
+                config.BaseAddress = new Uri(Configuration.GetValue<string>("GiaoHangNhanhProductionURI"));
+                config.DefaultRequestHeaders.Add("Token", Configuration.GetValue<string>("GiaoHangNhanhProductionToken"));
+                
+
+
             });
+
             services.AddControllersWithViews();
 
             // In production, the React files will be served from this directory
