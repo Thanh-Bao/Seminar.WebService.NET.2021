@@ -1,15 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Net.Http;
-using System.Text.Json;
 using System.Threading.Tasks;
-
-
 namespace SeminarWebservice2021.Controllers
 {
     [Route("api/[controller]")]
@@ -17,12 +8,10 @@ namespace SeminarWebservice2021.Controllers
     public class AddressController : ControllerBase
     {
         private readonly IHttpClientFactory _clientFactory;
-
         public AddressController(IHttpClientFactory clientFactory)
         {
             _clientFactory = clientFactory;
         }
-
         [HttpGet]
         [Route("provinces")]
         public async Task<IActionResult> GetProvinces()
@@ -31,7 +20,6 @@ namespace SeminarWebservice2021.Controllers
             var provinces = await client.GetStringAsync("master-data/province");
             return Ok(provinces);
         }
-
         // GET : .../api/Address/district?province_id=202
         [HttpGet]
         [Route("district")]
@@ -41,7 +29,6 @@ namespace SeminarWebservice2021.Controllers
             var district = await client.GetStringAsync("master-data/district?province_id="+province_id);
             return Ok(district);
         }
-
         [HttpGet]
         [Route("ward")]
         public async Task<IActionResult> GetWard(int district_id)

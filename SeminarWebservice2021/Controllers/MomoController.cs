@@ -1,10 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-
-using SeminarWebservice2021.Model;
-using System;
-using System.Collections.Generic;
-
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
@@ -35,11 +29,5 @@ namespace SeminarWebservice2021.Controllers
             var list = await client.PostAsync("lich-su-giao-dich.asp",stringData);
              return Ok(list.Content.ReadAsStringAsync().Result);
         }
-
-
     }
-
-
-
-
 }
