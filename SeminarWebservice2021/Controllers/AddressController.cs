@@ -32,7 +32,7 @@ namespace SeminarWebservice2021.Controllers
             return Ok(provinces);
         }
 
-        // GET : 
+        // GET : .../api/Address/district?province_id=202
         [HttpGet]
         [Route("district")]
         public async Task<IActionResult> GetDistrict(int province_id)

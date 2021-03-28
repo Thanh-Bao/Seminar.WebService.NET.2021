@@ -26,9 +26,11 @@ namespace SeminarWebservice2021
             {
                 config.BaseAddress = new Uri(Configuration.GetValue<string>("GiaoHangNhanhProductionURI"));
                 config.DefaultRequestHeaders.Add("Token", Configuration.GetValue<string>("GiaoHangNhanhProductionToken"));
+            });
+            services.AddHttpClient("MoMo", config =>
+            {
+                config.BaseAddress = new Uri(Configuration.GetValue<string>("MoMoURI"));
                 
-
-
             });
 
             services.AddControllersWithViews();
