@@ -1,19 +1,27 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import giaoHangNhanhCallAPI from './../../API/GiaoHangNhanhCallAPI';
 
 class GHNWards extends Component {
-   componentDidMount(){
-    giaoHangNhanhCallAPI("Address/wards","GET",{district_id:1566}).then(res=>{this.props.dispatch({type:"GET_WARDS",data:res.data.data})})
-   }
     render() {
-        return ( 
+        let saveCurrentDistrictToStore = (id) => {
+            this.props.dispatch({ type: "SAVE_WARD_ID", data: id });
+        }
+        let listWards = this.props.Wards.map(ward => {
+            return <option key={ward.WardCode} value={ward.WardCode}>{ward.WardName}</option>
+        });
+        return (
             <div>
-               {console.log(this.props.Wards)}
+                <div>
+                    <select onChange={(event) => { saveCurrentDistrictToStore(event.target.value) }} className="form-select">
+                        <option defaultValue>Chọn phường/xã</option>
+                        {listWards}
+                    </select>
+                </div>
             </div>
         );
     }
 }
+
 const mapStateToProps = state => ({
     Wards: state.Wards
 })

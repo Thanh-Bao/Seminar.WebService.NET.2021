@@ -6,7 +6,9 @@ class GHNDistricts extends Component {
     render() {
         let saveCurrentDistrictToStore = (id) => {
             this.props.dispatch({ type: "SAVE_DISTRICT_ID", data: id });
-            // giaoHangNhanhCallAPI("Address/wards", "GET", { province_id: id }).then(res => { this.props.dispatch({ type: "GET_DISTRICTS", data: res.data.data }) })
+           if(id>0){
+            giaoHangNhanhCallAPI("Address/wards", "GET", { district_id: id }).then(res => { this.props.dispatch({ type: "GET_WARDS", data: res.data.data }) })
+           }
         }
          let listDistricts = this.props.Districts.map(district => {
             return <option key={district.DistrictID} value={district.DistrictID}>{district.DistrictName}</option>
@@ -15,7 +17,7 @@ class GHNDistricts extends Component {
                 <div>
                     <div>
                         <select onChange={(event) => {saveCurrentDistrictToStore(event.target.value) }} className="form-select">
-                            <option defaultValue>Chọn huyện</option>
+                            <option defaultValue>Chọn quận/huyện</option>
                             {listDistricts}
                         </select>
                     </div>
