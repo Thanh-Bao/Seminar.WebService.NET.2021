@@ -22,7 +22,7 @@ namespace SeminarWebservice2021.Controllers
         }
         // GET : .../api/Address/district?province_id=202
         [HttpGet]
-        [Route("district")]
+        [Route("districts")]
         public async Task<IActionResult> GetDistrict(int province_id)
         {
             var client = _clientFactory.CreateClient("GiaoHangNhanhProduction");
@@ -30,7 +30,7 @@ namespace SeminarWebservice2021.Controllers
             return Ok(district);
         }
         [HttpGet]
-        [Route("ward")]
+        [Route("wards")]
         public async Task<IActionResult> GetWard(int district_id)
         {
             var client = _clientFactory.CreateClient("GiaoHangNhanhProduction");

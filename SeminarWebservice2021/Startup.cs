@@ -22,6 +22,7 @@ namespace SeminarWebservice2021
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
             services.AddHttpClient("GiaoHangNhanhProduction", config =>
             {
                 config.BaseAddress = new Uri(Configuration.GetValue<string>("GiaoHangNhanhProductionURI"));

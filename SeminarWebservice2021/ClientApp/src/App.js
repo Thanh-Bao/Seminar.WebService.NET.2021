@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
-import GiaoHangNhanh from './components/GiaoHangNhanh';
-import MoMo from './components/Momo';
+import GNHSelectAddress from './components/GiaoHangNhanh/GNHSelectedAddress'
 
 class App extends Component {
     render() {
         return (
             <div>
-                {/* <GiaoHangNhanh/> */}
-                {/* <MoMo/> */}
-                {console.log(6666)}
+               <GNHSelectAddress/>
             </div>
         );
     }

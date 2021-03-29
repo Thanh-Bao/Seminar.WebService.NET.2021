@@ -2,30 +2,45 @@ import { createStore } from 'redux';
 
 
 const initialState = {
-    AddressSelected: [],
+    SelectedProvinceID: 0,
+    SelectedDistrictID: 0,
+    SelectedWardID: 0,
     Provinces: [],
     Districts: [],
-    Ward: []
+    Wards: []
 }
-function AllReducer(state = initialState, action){
+function AllReducer(state = initialState, action) {
     switch (action.type) {
         case "GET_PROVINCES":
-           return {
-               ...state,
-               Provinces : [
-                   ...state.Provinces,
-                   {
-                       id : 123,
-                       name : "9999"
-                   }
-               ]
-           }
+            return {
+                ...state,
+                Provinces: action.data
+            }
         case "GET_DISTRICTS":
-                return {
-                    ...state,
-                    Districts : action.data
-                };
-          
+            return {
+                ...state,
+                Districts: action.data
+            };
+        case "GET_WARDS":
+            return {
+                ...state,
+                Wards: action.data
+            };
+        case "SAVE_PROVINCE_ID":
+            return {
+                ...state,
+                SelectedProvinceID: action.data
+            };
+        case "SAVE_DISTRICT_ID":
+            return {
+                ...state,
+                SelectedDistrictID: action.data
+            };
+        case "SAVE_WARD_ID":
+            return {
+                ...state,
+                SelectedWardID: action.data
+            };
         default:
             break;
     }
