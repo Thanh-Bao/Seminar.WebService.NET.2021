@@ -8,7 +8,8 @@ class GHNProvinces extends Component {
        
     render() {
         let saveCurrentProvinceToStore = (id) => {
-             this.props.dispatch({ type: "SAVE_PROVINCE_ID", data: id })
+             this.props.dispatch({ type: "SAVE_PROVINCE_ID", data: id });
+             giaoHangNhanhCallAPI("Address/districts","GET",{province_id:id}).then(res=>{this.props.dispatch({type:"GET_DISTRICTS",data:res.data.data})})
         }
         let listProvinces = this.props.Provinces.map(province => {
             return <option key={province.ProvinceID} value={province.ProvinceID}>{province.ProvinceName}</option>
@@ -18,7 +19,6 @@ class GHNProvinces extends Component {
                 <select onChange={(event)=>{saveCurrentProvinceToStore(event.target.value)}} className="form-select">
                     <option defaultValue>Chọn tỉnh</option>
                     {listProvinces}
-                    {console.log("tinh"+this.props.abc)}
                 </select>
 
             </div>
@@ -26,7 +26,6 @@ class GHNProvinces extends Component {
     }
 }
 const mapStateToProps = state => ({
-    Provinces: state.Provinces,
-    abc : state.SelectedProvinceID
+    Provinces: state.Provinces
 })
 export default connect(mapStateToProps)(GHNProvinces);

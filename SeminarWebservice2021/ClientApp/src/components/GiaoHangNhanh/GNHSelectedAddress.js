@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import giaoHangNhanhCallAPI from './../../API/GiaoHangNhanhCallAPI';
 import GHNProvinces from './GHNProvinces'
+import GHNDistricts from './GHNDistricts'
 
 class GNHSelectedAddress extends Component {
 
@@ -9,6 +9,7 @@ class GNHSelectedAddress extends Component {
         return (
             <div>
                 <GHNProvinces/>
+                <GHNDistricts/>
             </div>
         );
     }
