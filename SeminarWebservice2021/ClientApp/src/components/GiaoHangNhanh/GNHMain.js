@@ -4,11 +4,39 @@ import GHNProvinces from './GHNProvinces'
 import GHNDistricts from './GHNDistricts'
 import GHNWards from './GHNWards';
 
-class GNHSelectedAddress extends Component {
+import giaoHangNhanhCallAPI from './../../API/GiaoHangNhanhCallAPI'
 
+class GNHMain extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            shift: []
+        };
+    }
+    componentDidMount() {
+        giaoHangNhanhCallAPI("PostOffices/workShift").then(response => {
+            this.setState({
+                shift: response.data.data
+            })
+        })
+    }
     render() {
+        let Shifts = this.state.shift.map(shift => {
+            return <label key={shift.id} className="list-group-item">
+                <input className="form-check-input me-1" type="checkbox" />
+                {shift.title}
+            </label>
+        });
         return (
             <div>
+                <div className="container mt-5">
+                    <div className="row justify-content-center">
+                        <h4>Chọn ca lấy hàng hôm nay</h4>
+                        <div className="list-group">
+                            {Shifts}
+                        </div>
+                    </div>
+                </div>
                 <div className="container mt-5">
                     <div className="row">
                         <div className="col-sm">
@@ -35,4 +63,4 @@ const mapStateToProps = state => ({
     DistrictID: state.SelectedDistrictID,
     WardID: state.SelectedWardID
 })
-export default connect(mapStateToProps)(GNHSelectedAddress);
+export default connect(mapStateToProps)(GNHMain);
