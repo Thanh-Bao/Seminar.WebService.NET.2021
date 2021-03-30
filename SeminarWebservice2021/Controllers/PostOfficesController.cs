@@ -16,7 +16,7 @@ namespace SeminarWebservice2021.Controllers
         }
         [HttpGet]
         [Route("workShift")]
-        public async Task<IActionResult> GetProvinces()
+        public async Task<IActionResult> GetShifts()
         {
             var client = _clientFactory.CreateClient("GiaoHangNhanhProduction");
             var list = await client.GetStringAsync("v2/shift/date");
@@ -28,7 +28,7 @@ namespace SeminarWebservice2021.Controllers
         public async Task<IActionResult> GetStation(string district_id, string ward_id)
         {
             var client = _clientFactory.CreateClient("GiaoHangNhanhProduction");
-            var station = await client.GetStringAsync("v2/station/get?district_id=" + district_id + "&ward_code" + ward_id);
+            var station = await client.GetStringAsync("v2/station/get?district_id=" + district_id + "&ward_code=" + ward_id);
             return Ok(station);
         }
 

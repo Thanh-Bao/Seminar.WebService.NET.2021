@@ -6,7 +6,5 @@ export default function GiaoHangNhanhCallAPI(enpoint, method='GET', paramObj){
         method : method,
         url : `${Config.API_URI}${enpoint}`,
         params : paramObj
-    }).catch(err=>{
-        console.log(err);
     })
 }
