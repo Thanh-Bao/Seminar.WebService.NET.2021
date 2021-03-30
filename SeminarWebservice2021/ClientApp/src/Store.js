@@ -7,7 +7,26 @@ const initialState = {
     SelectedWardID: 0,
     Provinces: [],
     Districts: [],
-    Wards: []
+    Wards: [],
+    ////////////////////
+    FromDistricts: [],
+    FromSelectedDistrictID: 0,
+    ///////////////////
+    ToDistricts: [],
+    ToWards: [],
+    ToSelectedDistrictID: 0,
+    ToSelectedWardID: 0,
+    ////////////////////
+    MoMos: [
+        {
+            TransactionId : 0,
+            partner: 0,
+            partnerId: 0,
+            amount: 0,
+            content: 0,
+            time: 0
+        }
+    ]
 }
 function AllReducer(state = initialState, action) {
     switch (action.type) {
@@ -40,6 +59,44 @@ function AllReducer(state = initialState, action) {
             return {
                 ...state,
                 SelectedWardID: action.data
+            };
+        ///////////////////////////////////////
+        case "GET_FROM_DISTRICTS":
+            return {
+                ...state,
+                FromDistricts: action.data
+            };
+        case "SAVE_FROM_DISTRICT_ID":
+            return {
+                ...state,
+                FromSelectedDistrictID: action.data
+            };
+        ///////////////////////////////////////////////
+        case "GET_TO_DISTRICTS":
+            return {
+                ...state,
+                ToDistricts: action.data
+            };
+        case "GET_TO_WARDS":
+            return {
+                ...state,
+                ToWards: action.data
+            };
+        case "SAVE_TO_DISTRICT_ID":
+            return {
+                ...state,
+                ToSelectedDistrictID: action.data
+            };
+        case "SAVE_TO_WARD_ID":
+            return {
+                ...state,
+                ToSelectedWardID: action.data
+            };
+        ///////////////////////////
+        case "GET_MOMOS":
+            return {
+                ...state,
+                MoMos: action.data
             };
         default:
             break;

@@ -4,7 +4,9 @@ import GHNProvinces from './GHNProvinces'
 import GHNDistricts from './GHNDistricts'
 import GHNWards from './GHNWards';
 
-import giaoHangNhanhCallAPI from './../../API/GiaoHangNhanhCallAPI'
+import giaoHangNhanhCallAPI from './../../API/GiaoHangNhanhCallAPI';
+import GHNFromAddress from './GHNFromAddress';
+import GHNToAddress from './GHNToAddress';
 
 class GNHMain extends Component {
     constructor(props) {
@@ -15,7 +17,8 @@ class GNHMain extends Component {
                 locationCode: 0,
                 address: "Hãy chọn đúng địa chỉ/ Hoặc không có bưu cục ở vị trí này",
                 locationName: "Hãy chọn đúng địa chỉ/ Hoặc không có bưu cục ở vị trí này"
-            }]
+            }],
+            Fee: 0
         };
     }
     componentDidMount() {
@@ -43,7 +46,6 @@ class GNHMain extends Component {
                 this.setState({
                     stations: response.data.data
                 })
-                console.log(this.state.stations)
             }).catch(
                 () => {
                     this.setState({
@@ -61,9 +63,30 @@ class GNHMain extends Component {
                 <td>{station.locationCode}</td>
                 <td>{station.locationName}</td>
                 <td>{station.address}</td>
-                <td><a target="_blank" href={"https://www.google.com/maps/place/"+station.latitude+","+station.longitude}>{station.latitude}<br></br> {station.longitude}</a></td>
+                <td><a rel="noopener noreferrer" href={"https://www.google.com/maps/place/" + station.latitude + "," + station.longitude}>{station.latitude}<br></br> {station.longitude}</a></td>
             </tr>
         });
+
+
+        let GetFee = () => {
+            // let body =
+            // {
+            //     from_district_id: 1454,
+            //     service_id: 53320,
+            //     to_district_id: 1452,
+            //     to_ward_code: 21012,
+            //     height: 50,
+            //     length: 20,
+            //     weight: 200,
+            //     width: 20,
+            //     insurance_fee: 10000
+            // }
+            // giaoHangNhanhCallAPI("Fee", "GET",{},body ).then(response => {
+            //    console.log(response)
+            // });
+        }
+
+
 
         return (
             <div>
@@ -90,7 +113,7 @@ class GNHMain extends Component {
                 </div>
 
                 <div className="container mt-5">
-                    <div className="row justify-content-center">
+                    <div className="row justify-content-center text-center">
                         <div className="col-4">
                             <p>
                                 <button onClick={() => { getStation() }} className="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseViewStation" aria-expanded="false" aria-controls="collapseExample">
@@ -119,9 +142,50 @@ class GNHMain extends Component {
                     </div>
                 </div>
 
-                {console.log(this.props.ProvinceID)}
-                {console.log(this.props.DistrictID)}
-                {console.log(this.props.WardID)}
+                <div className="container mt-5">
+                    <div className="row justify-content-center text-center">
+                        <h3>Tính phí vận chuyển</h3>
+                        <GHNFromAddress />
+                    </div>
+                </div>
+
+                <div className="container">
+                    <div className="row justify-content-center text-center">
+                        <GHNToAddress />
+                    </div>
+                </div>
+
+
+                <div className="container my-5">
+                    <div className="row justify-content-center text-center">
+                        <div className="col-4">
+                            <p>
+                                <button onClick={() => { GetFee() }} className="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseViewStation" aria-expanded="false" aria-controls="collapseExample">
+                                    Xem báo giá phí vận chuyển
+                                </button>
+                            </p>
+                        </div>
+                        <div className="collapse" id="collapseViewStation">
+
+                            <div className="row justify-content-center text-center">
+                                <div className="col-4">
+                                    <div className="row">
+                                        <h6>Phí vận chuyển là :</h6> <span className="badge bg-warning text-dark"><h2>{this.state.Fee} VNĐ</h2></span> <h6>(đã bao gồm VAT 10%)</h6>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                {console.log("from district")}
+                {console.log(this.props.from)}
+                {console.log("to district")}
+                {console.log(this.props.to1)}
+                {console.log("to ward")}
+                {console.log(this.props.to2)}
             </div>
 
         );
@@ -130,6 +194,10 @@ class GNHMain extends Component {
 const mapStateToProps = state => ({
     ProvinceID: state.SelectedProvinceID,
     DistrictID: state.SelectedDistrictID,
-    WardID: state.SelectedWardID
+    WardID: state.SelectedWardID,
+
+    to1: state.ToSelectedDistrictID,
+    to2: state.ToSelectedWardID,
+    from: state.FromSelectedDistrictID
 })
 export default connect(mapStateToProps)(GNHMain);

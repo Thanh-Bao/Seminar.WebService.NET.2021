@@ -22,7 +22,6 @@ class GHNProvinces extends Component {
                     <option defaultValue>Chọn tỉnh/TP</option>
                     {listProvinces}
                 </select>
-
             </div>
         );
     }
