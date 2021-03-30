@@ -61,6 +61,7 @@ class GNHMain extends Component {
                 <td>{station.locationCode}</td>
                 <td>{station.locationName}</td>
                 <td>{station.address}</td>
+                <td><a target="_blank" href={"https://www.google.com/maps/place/"+station.latitude+","+station.longitude}>{station.latitude}<br></br> {station.longitude}</a></td>
             </tr>
         });
 
@@ -105,6 +106,7 @@ class GNHMain extends Component {
                                             <th scope="col">Mã Bưu cục</th>
                                             <th scope="col">Tên Bưu Cục</th>
                                             <th scope="col">Địa Chỉ</th>
+                                            <th scope="col">Link Google map</th>
                                         </tr>
                                     </thead>
                                     <tbody>
