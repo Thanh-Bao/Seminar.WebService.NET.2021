@@ -22,7 +22,7 @@ namespace SeminarWebservice2021.Controllers
             var client = _clientFactory.CreateClient("GiaoHangNhanhProduction");
             var fee = await client.PostAsJsonAsync("v2/shipping-order/fee", info);
             string result = fee.Content.ReadAsStringAsync().Result;
-            return Ok(info);
+            return Ok(result);
         }
     }
 }
