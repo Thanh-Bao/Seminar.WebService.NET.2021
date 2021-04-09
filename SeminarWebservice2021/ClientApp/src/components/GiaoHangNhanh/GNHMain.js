@@ -18,7 +18,12 @@ class GNHMain extends Component {
                 address: "Hãy chọn đúng địa chỉ/ Hoặc không có bưu cục ở vị trí này",
                 locationName: "Hãy chọn đúng địa chỉ/ Hoặc không có bưu cục ở vị trí này"
             }],
-            Fee: 0
+            Fee: 0,
+            height: 50,
+            length: 20,
+            weight: 20,
+            width: 20,
+            insurance_fee: 10000
         };
     }
     componentDidMount() {
@@ -69,21 +74,22 @@ class GNHMain extends Component {
 
 
         let GetFee = () => {
-            // let body =
-            // {
-            //     from_district_id: 1454,
-            //     service_id: 53320,
-            //     to_district_id: 1452,
-            //     to_ward_code: 21012,
-            //     height: 50,
-            //     length: 20,
-            //     weight: 200,
-            //     width: 20,
-            //     insurance_fee: 10000
-            // }
-            // giaoHangNhanhCallAPI("Fee", "GET",{},body ).then(response => {
-            //    console.log(response)
-            // });
+            let body =
+            {
+                from_district_id: this.props.fromDistrict,
+                service_id: 53320,
+                to_district_id: this.props.toDistrict,
+                to_ward_code: this.props.toWard,
+                height: 50,
+                length: 20,
+                weight: 1000,
+                width: 50,
+                insurance_fee: 100000
+            }
+            giaoHangNhanhCallAPI("Fee", "POST", null, body).then(response => {
+                this.setState({ Fee : response.data.data.total})
+               
+            });
         }
 
 
@@ -156,6 +162,7 @@ class GNHMain extends Component {
                 </div>
 
 
+
                 <div className="container my-5">
                     <div className="row justify-content-center text-center">
                         <div className="col-4">
@@ -178,14 +185,6 @@ class GNHMain extends Component {
                         </div>
                     </div>
                 </div>
-
-
-                {console.log("from district")}
-                {console.log(this.props.from)}
-                {console.log("to district")}
-                {console.log(this.props.to1)}
-                {console.log("to ward")}
-                {console.log(this.props.to2)}
             </div>
 
         );
@@ -196,8 +195,8 @@ const mapStateToProps = state => ({
     DistrictID: state.SelectedDistrictID,
     WardID: state.SelectedWardID,
 
-    to1: state.ToSelectedDistrictID,
-    to2: state.ToSelectedWardID,
-    from: state.FromSelectedDistrictID
+    toDistrict: state.ToSelectedDistrictID,
+    toWard: state.ToSelectedWardID,
+    fromDistrict: state.FromSelectedDistrictID
 })
 export default connect(mapStateToProps)(GNHMain);

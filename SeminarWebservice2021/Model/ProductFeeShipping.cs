@@ -12,6 +12,7 @@ namespace SeminarWebservice2021.Model
         public int service_id = 53320;
         public int to_district_id { set; get; }
         public int to_ward_code { set; get; }
+        public int height { set; get; }
         public int length { set; get; }
         public int weight { set; get; }
         public int width { set; get; }

@@ -15,7 +15,7 @@ namespace SeminarWebservice2021.Controllers
             _clientFactory = clientFactory;
         }
 
-        [HttpGet]
+        [HttpPost]
         public async Task<IActionResult> GetFee([FromBody] ProductFeeShipping info)
         {
 
