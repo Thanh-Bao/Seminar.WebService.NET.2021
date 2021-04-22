@@ -20,7 +20,7 @@ namespace SeminarWebservice2021.Controllers
             var provinces = await client.GetStringAsync("master-data/province");
             return Ok(provinces);
         }
-        // GET : .../api/Address/district?province_id=202
+        // GET : .../api/Address/districts?province_id=202
         [HttpGet]
         [Route("districts")]
         public async Task<IActionResult> GetDistricts(int province_id)

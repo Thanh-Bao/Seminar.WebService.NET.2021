@@ -23,6 +23,15 @@ class MoMo extends Component {
                 transaction.time = unixTimeToDate(transaction.time);
                 arr.push(transaction)
             }
+
+            arr.reverse();
+
+            for (var i = 0; i < arr.length; i++) {
+                if (arr[i].partner === 'null') {
+                    arr.splice(i, 1);
+                }
+            }
+
             this.props.dispatch({ type: "GET_MOMOS", data: arr })
         })
     }

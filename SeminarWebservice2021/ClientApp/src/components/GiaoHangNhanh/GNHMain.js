@@ -23,7 +23,7 @@ class GNHMain extends Component {
             length: 20,
             weight: 20,
             width: 20,
-            insurance_fee: 10000
+            insurance_fee: 500000
         };
     }
     componentDidMount() {
@@ -80,10 +80,10 @@ class GNHMain extends Component {
                 service_id: 53320,
                 to_district_id: this.props.toDistrict,
                 to_ward_code: this.props.toWard,
-                height: 50,
+                height: 20,
                 length: 20,
                 weight: 1000,
-                width: 50,
+                width: 20,
                 insurance_fee: 100000
             }
             giaoHangNhanhCallAPI("Fee", "POST", null, body).then(response => {
@@ -164,6 +164,9 @@ class GNHMain extends Component {
 
 
                 <div className="container my-5">
+
+                    
+
                     <div className="row justify-content-center text-center">
                         <div className="col-4">
                             <p>
@@ -173,7 +176,13 @@ class GNHMain extends Component {
                             </p>
                         </div>
                         <div className="collapse" id="collapseViewStation">
+                            <div className="row justify-content-center text-center">
+                                <div className="alert alert-success" role="alert">
 
+                                    <p>Mặc đinh, khối lượng 1KG, Kích thước Dài=Rộng=Cao=20cm,Giá trị đơn hàng: 1.000.000 đ </p>
+                                </div>
+
+                            </div>
                             <div className="row justify-content-center text-center">
                                 <div className="col-4">
                                     <div className="row">
